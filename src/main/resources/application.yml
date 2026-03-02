@@ -13,3 +13,13 @@ spring:
      enabled: true                   # 启用文件上传
      file-size-threshold: 2KB        # 文件写入磁盘的阈值
      location: /tmp                  # 临时文件存储位置
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  datasource:
+    url: jdbc:mysql//:localhost:3306/springbootdemo
+    username: root
+    password: 20010122
+    driver-class-name: com.mysql.jdbc.Driver
+
