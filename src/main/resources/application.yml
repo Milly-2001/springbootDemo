@@ -1,0 +1,15 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+    cache: false
+  servlet:
+    multipart:
+     max-file-size: 10MB           # 单个文件大小限制
+     max-request-size: 100MB        # 总请求大小限制
+     enabled: true                   # 启用文件上传
+     file-size-threshold: 2KB        # 文件写入磁盘的阈值
+     location: /tmp                  # 临时文件存储位置
