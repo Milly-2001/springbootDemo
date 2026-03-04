@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>主页</title>
+</head>
+<body>
+<h1>欢迎登录系统！</h1>
+<p>这是受保护的主页</p>
+
+<!-- 显示当前登录用户 -->
+<div th:if="${#authentication != null}">
+  当前用户：<span th:text="${#authentication.name}"></span>
+</div>
+
+<!-- 退出登录按钮 -->
+<form th:action="@{/logout}" method="post">
+  <button type="submit">退出登录</button>
+</form>
+</body>
+</html>

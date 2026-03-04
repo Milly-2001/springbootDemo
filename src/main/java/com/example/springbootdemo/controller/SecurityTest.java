@@ -1,18 +1,22 @@
 package com.example.springbootdemo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SecurityTest {
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello";
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // 返回登录页面
     }
 
-    @PostMapping("/doLogin")
-    public String doLogin() {
-        return "我登录成功了";
+    @GetMapping("/home")
+    public String home() {
+        return "home"; // 登录成功后的主页
+    }
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/home";
     }
 }
