@@ -18,6 +18,14 @@ spring:
     url: jdbc:mysql://localhost:3306/blog_system
     username: root
     password: 20010122
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
   #data:
   #  redis:
   #    host: 127.0.0.1

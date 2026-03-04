@@ -1,59 +1,27 @@
 package com.example.springbootdemo.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import jakarta.persistence.*;
+import java.util.*;
 
-public class User implements UserDetails {
+@Entity
+@Table(name = "t_user")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
     private String password;
     private String email;
     private String created;
     private Integer valid;
-    private List<Authority> author;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>() ;
-        for (Authority auth : author) {
-            authorities.add(new SimpleGrantedAuthority(auth.getAuthority()));
-        }
-            return authorities;
-        }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "t_user_authority",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Set<Authority> roles = new HashSet<>();
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
 
     public Integer getId() {
         return id;
@@ -95,11 +63,19 @@ public class User implements UserDetails {
         this.valid = valid;
     }
 
-    public List<Authority> getAuthor() {
-        return author;
+    public Set<Authority> getRoles() {
+        return roles;
     }
 
-    public void setAuthor(List<Authority> author) {
-        this.author = author;
+    public void setRoles(Set<Authority> roles) {
+        this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

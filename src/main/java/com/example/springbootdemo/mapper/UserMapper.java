@@ -15,4 +15,6 @@ public interface UserMapper {
 
     @Select("SELECT * FROM t_authority a,t_user_authority u WHERE a.id=u.authority_id and u.user_id=#{id}")
     List<Authority> getUserRolesByUid (Integer id) ;
+
+
 }
