@@ -4,6 +4,7 @@ import com.example.springbootdemo.mapper.UserMapper;
 import com.example.springbootdemo.model.Authority;
 import com.example.springbootdemo.model.User;
 import com.example.springbootdemo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,14 +19,14 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements UserDetailsService {
 
-        private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-        @Override
-        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            User user = userRepository.findByUsername(username)
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("用户不存在: " + username));
-
-            return new org.springframework.security.core.userdetails.User(
+        return new org.springframework.security.core.userdetails.User(
                     user.getUsername(),
                     user.getPassword(),
                     getAuthorities(user.getRoles())

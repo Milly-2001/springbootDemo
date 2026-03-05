@@ -31,7 +31,7 @@ public class WebSecurityConfig{
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // 允许所有人访问登录页面和静态资源
-                        .requestMatchers("/login", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/register","/login","/login.html", "/register.html", "/css/**", "/js/**", "/images/**").permitAll()
                         // 其他所有请求都需要认证
                         .anyRequest().authenticated()
                 )
@@ -41,7 +41,7 @@ public class WebSecurityConfig{
                         // 登录表单提交的URL
                         .loginProcessingUrl("/login")
                         // 登录成功后的跳转页面
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("/home.html", true)
                         // 登录失败后的跳转页面
                         .failureUrl("/login?error=true")
                         .permitAll()
