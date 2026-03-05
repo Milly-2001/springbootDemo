@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>主页</title>
@@ -12,7 +12,7 @@
 <div th:if="${#authentication != null}">
   当前用户：<span th:text="${#authentication.username}"></span>
 </div>
-
+<p><a href="/main">跳转</a></p>
 <!-- 退出登录按钮 -->
 <form th:action="@{/logout}" method="post">
   <button type="submit">退出登录</button>

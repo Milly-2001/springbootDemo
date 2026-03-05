@@ -40,7 +40,7 @@ public class WebSecurityConfig{
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // 允许所有人访问登录页面和静态资源
-                        .requestMatchers("/register","/login","/login.html", "/register.html", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/register","/login","/login.html", "/register.html","/resources/**","/css/**", "/js/**", "/images/**").permitAll()
                         // 其他所有请求都需要认证
                         .anyRequest().authenticated()
                 )

@@ -4,6 +4,7 @@ import com.example.springbootdemo.model.User;
 import com.example.springbootdemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@RestController
+@Controller
 public class SecurityTest {
 
     @Autowired
@@ -28,7 +29,13 @@ public class SecurityTest {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:/home";
+        return "login";
+    }
+
+    @GetMapping("/main")
+    public String login() {
+        System.out.println("========== 控制器被调用了！ ==========");
+        return "mainPage";
     }
 
     @PostMapping("/register")
