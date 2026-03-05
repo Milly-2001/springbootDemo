@@ -1,6 +1,5 @@
 package com.example.springbootdemo.service;
 
-import com.example.springbootdemo.mapper.UserMapper;
 import com.example.springbootdemo.model.Authority;
 import com.example.springbootdemo.model.User;
 import com.example.springbootdemo.repository.UserRepository;

@@ -10,7 +10,7 @@
 
 <!-- 显示当前登录用户 -->
 <div th:if="${#authentication != null}">
-  当前用户：<span th:text="${#authentication.name}"></span>
+  当前用户：<span th:text="${#authentication.username}"></span>
 </div>
 
 <!-- 退出登录按钮 -->

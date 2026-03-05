@@ -51,8 +51,6 @@ public class SecurityTest {
         // 需要先创建角色并设置
         // user.setRoles(roles);
         userRepository.save(user);
-
-
         return "redirect:/login?registered=true";
     }
 }
