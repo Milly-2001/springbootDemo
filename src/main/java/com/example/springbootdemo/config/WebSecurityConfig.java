@@ -1,28 +1,28 @@
 package com.example.springbootdemo.config;
 
-import com.example.springbootdemo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.springbootdemo.filter.CaptchaFilter;
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig{
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
+    @Resource
     AuthenticationConfiguration authenticationConfiguration;
+
+    @Resource
+    private CaptchaFilter captchaFilter;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
@@ -40,19 +40,21 @@ public class WebSecurityConfig{
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // 允许所有人访问登录页面和静态资源
-                        .requestMatchers("/register","/login","/toLogin", "/register.html","/resources/**","/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/","/register","/login","/toLogin","/captcha", "/registerUser","/resources/**","/css/**", "/js/**", "/images/**").permitAll()
                         // 其他所有请求都需要认证
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         // 自定义登录页面
                         .loginPage("/login")
+                        .loginProcessingUrl("/toLogin")
                         // 登录成功后的跳转页面
                         .defaultSuccessUrl("/home", true)
                         // 登录失败后的跳转页面
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
+                .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()

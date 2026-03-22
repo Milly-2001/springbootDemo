@@ -14,7 +14,7 @@
             align-items: center;
             height: 100vh;
         }
-        .login-container {
+        .register-container {
             background-color: white;
             padding: 30px;
             border-radius: 5px;
@@ -34,7 +34,8 @@
             color: #555;
         }
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="email"]{
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
@@ -67,8 +68,7 @@
     <h2>用户注册</h2>
 
     <div th:if="${error}" class="error-message" th:text="${error}"></div>
-    r
-    <form action="/register" method="post">
+    <form action="/registerUser" method="post">
         <div class="form-group">
             <label>用户名：</label>
             <input type="text" name="username" required>
