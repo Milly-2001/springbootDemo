@@ -49,7 +49,7 @@ public class WebSecurityConfig{
                         .loginPage("/login")
                         .loginProcessingUrl("/toLogin")
                         // 登录成功后的跳转页面
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("/home2", true)
                         // 登录失败后的跳转页面
                         .failureUrl("/login?error=true")
                         .permitAll()
