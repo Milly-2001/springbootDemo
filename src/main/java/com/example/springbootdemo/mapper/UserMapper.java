@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Select("SELECT * FROM t_user WHERE id=#{id}")
+    @Select("SELECT * FROM t_user WHERE username=#{username}")
     User loadUserByUsername(String username);
 
     @Select("SELECT * FROM t_authority a,t_user_authority u WHERE a.id=u.authority_id and u.user_id=#{id}")

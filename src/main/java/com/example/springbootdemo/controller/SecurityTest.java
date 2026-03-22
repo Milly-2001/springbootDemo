@@ -29,13 +29,12 @@ public class SecurityTest {
 
     @GetMapping("/")
     public String root() {
-        return "login";
+        return "mainPage";
     }
 
-    @GetMapping("/main")
+    @GetMapping("/login")
     public String login() {
-        System.out.println("========== 控制器被调用了！ ==========");
-        return "mainPage";
+        return "login";
     }
 
     @PostMapping("/register")
