@@ -4,7 +4,6 @@ import com.example.springbootdemo.model.User;
 import com.example.springbootdemo.repository.UserRepository;
 import com.example.springbootdemo.service.UserService;
 import jakarta.annotation.Resource;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class UserServiceImpl implements UserService {
             return org.springframework.security.core.userdetails.User.builder()
                     .username(user.getUsername())
                     .password(user.getPassword())
-                    .authorities(AuthorityUtils.NO_AUTHORITIES)
+                    .authorities(user.getAuthorities())
                     .build();
         }
 

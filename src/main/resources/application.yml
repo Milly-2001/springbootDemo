@@ -15,7 +15,6 @@ spring:
      enabled: true                   # 启用文件上传
      file-size-threshold: 2KB        # 文件写入磁盘的阈值
      location: /tmp
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog_system

@@ -1,11 +1,17 @@
 package com.example.springbootdemo.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import java.util.*;
 
 @Entity
 @Table(name = "t_user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +26,16 @@ public class User {
     @JoinTable(name = "t_user_authority",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id"))
-    private Set<Authority> roles = new HashSet<>();
+    private List<Authority> roleList;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        for (Authority authority : roleList) {
+            authorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
+        }
+        return authorities;
+    }
 
 
     public Integer getId() {
@@ -63,19 +78,32 @@ public class User {
         this.valid = valid;
     }
 
-    public Set<Authority> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Authority> roles) {
-        this.roles = roles;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }

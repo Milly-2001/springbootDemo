@@ -14,9 +14,6 @@ public class Authority {
     private String authority;
     private String authority_desc;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "t_authority_permission",
             joinColumns = @JoinColumn(name = "authority_id"),
